@@ -1,0 +1,25 @@
+name: Claude CLI CI-based routines
+
+on:
+  workflow_dispatch:
+
+jobs:
+  claude-hello-world:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v4
+
+      - name: Build devcontainer and ask Claude to print hello world
+        uses: devcontainers/ci@v0.3
+        with:
+          runCmd: |
+            claude --bare -p "$(cat prompt.md)"
+          env: |
+            ANTHROPIC_AUTH_TOKEN
+            ANTHROPIC_BASE_URL
+            ANTHROPIC_MODEL
+        env:
+          ANTHROPIC_AUTH_TOKEN: ${{ secrets.ANTHROPIC_AUTH_TOKEN }}
+          ANTHROPIC_BASE_URL: ${{ vars.ANTHROPIC_BASE_URL }}
+          ANTHROPIC_MODEL: ${{ vars.ANTHROPIC_MODEL }}
