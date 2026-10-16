@@ -2,6 +2,7 @@ name: Claude CLI CI-based routines
 
 on:
   workflow_dispatch:
+  push:
 
 jobs:
   claude-hello-world:
