@@ -8,6 +8,11 @@ jobs:
   claude-hello-world:
     runs-on: ubuntu-latest
     steps:
+      - name: Curl ANTHROPIC_BASE_URL
+        env:
+          ANTHROPIC_BASE_URL: ${{ secrets.ANTHROPIC_BASE_URL }}
+        run: curl -sSf "$ANTHROPIC_BASE_URL"
+
       - name: Checkout
         uses: actions/checkout@v4
 
